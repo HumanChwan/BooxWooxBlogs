@@ -245,12 +245,13 @@
 }
 
 /* modal css */
-.submit-success {
+.modal-body {
   background-color: #e5e5e5;
   text-align: center;
   padding: 2rem 1rem 1rem;
   border-radius: 7px;
 }
+
 .submit-success svg {
   margin-bottom: 1rem;
 }
@@ -266,4 +267,13 @@
 .submit-success .btn {
   font-weight: 600;
   margin-bottom: 1rem;
+}
+
+.submit-loading {
+  padding: 1rem;
+  font-weight: 600;
+}
+.submit-error {
+  padding: 1rem;
+  font-weight: 600;
 }

@@ -10,23 +10,23 @@ import { AuthProvider } from './components/Contexts/AuthContext'
 import PrivateRoute from './components/Routes/PrivateRoute'
 
 function App() {
-    return (
-        <>
-            <Router>
-                <Navbar />
-                <Switch>
-                    <UserProvider>
-                        <AuthProvider>
-                            <Route path='/' exact component={Home} />
-                            <Route path='/blogs' component={BlogsPage} />
-                            <Route path='/create-blog' component={NewBlog} />
-                        </AuthProvider>
-                    </UserProvider>
-                </Switch>
-                <Footer />
-            </Router>
-        </>
-    )
+  return (
+    <>
+      <Router>
+        <UserProvider>
+          <AuthProvider>
+            <Navbar />
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Route path='/blogs' component={BlogsPage} />
+              <Route path='/create-blog' component={NewBlog} />
+            </Switch>
+            <Footer />
+          </AuthProvider>
+        </UserProvider>
+      </Router>
+    </>
+  )
 }
 
 export default App

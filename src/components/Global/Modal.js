@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom'
 import useEventListener from '../../hooks/useEventListener'
 import './modal.css'
 
-const Modal = ({ showModal, setShowModal, children }) => {
+const Modal = ({ showModal, setShowModal, children, allowRemove }) => {
   const backgroundRef = useRef()
 
   useEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && showModal) {
+    if (e.key === 'Escape' && allowRemove) {
       setShowModal(false)
     }
   })
 
   useEventListener('mousedown', (e) => {
-    if (e.target === backgroundRef.current && showModal) {
+    if (e.target === backgroundRef.current && allowRemove) {
       setShowModal(false)
     }
   })

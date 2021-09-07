@@ -9,7 +9,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useUser } from '../../Contexts/UserContext'
 import Modal from '../../Global/Modal'
 import useTimeout from '../../../hooks/useTimeout'
-import { ReactComponent as CheckCircle } from '../../../assets/check-circle.svg'
+import ModalSwitch from './ModalSwitch'
 
 export default function NewBlog() {
   const { uploadBlog, getImgurLink } = useUser()
@@ -19,6 +19,8 @@ export default function NewBlog() {
   const [previewURL, setPreviewURL] = useState('')
 
   const [submitError, setSubmitError] = useState('')
+  const [submitLoading, setSubmitLoading] = useState(false)
+
   const [errorFeatureImg, setErrorFeatureImg] = useState('')
   const [imageUploadLoading, setImageUploadLoading] = useState(false)
   const [imageUploadError, setImageUploadError] = useState(false)
@@ -40,6 +42,8 @@ export default function NewBlog() {
 
   const handleSubmitBlog = async (e) => {
     e.preventDefault()
+    setSubmitLoading(true)
+    setShowModal(true)
     const result = await uploadBlog({
       Title: title,
       Description: description,
@@ -47,9 +51,9 @@ export default function NewBlog() {
       Feature_Img: previewURL,
       Status: 'Published',
     })
+    setSubmitLoading(false)
 
     if (result) {
-      // show modal
       setShowModal(true)
     } else {
       setSubmitError('Submit Failed, Try Again Later!')
@@ -280,24 +284,12 @@ export default function NewBlog() {
           </form>
         </div>
       </div>
-      <Modal showModal={showModal} setShowModal={setShowModal}>
-        <div className='submit-success'>
-          <CheckCircle />
-          <h3>Thanks for writing a blog.</h3>
-          <p>
-            Your blog will be screened from our committee and will notify you
-            for publishing the blog.
-          </p>
-          <button
-            onClick={() => {
-              history.push('/')
-            }}
-            className='btn'
-          >
-            Go to Home
-          </button>
-          <h6>You will be redirected to home page in 10sec</h6>
-        </div>
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        allowRemove={!!submitError}
+      >
+        <ModalSwitch submitLoading={submitLoading} submitError={submitError} />
       </Modal>
     </>
   )

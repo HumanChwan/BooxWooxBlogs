@@ -1,9 +1,16 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { useUser } from '../Contexts/UserContext'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { user } = useUser()
+    const { user, setShowLoginModal } = useUser()
+    useEffect(() => {
+        if (!user) {
+            setShowLoginModal(true)
+        }
+    }, [])
+
     return (
         <Route
             {...rest}
