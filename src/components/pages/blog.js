@@ -48,6 +48,12 @@ function Replies() {
     return <div id='replies-list'>{replyHolder}</div>
 }
 
+const isLink = (img) => img.includes('https://') || img.includes('http://')
+const getImg = (img) => {
+    console.log('img:', img)
+    return isLink(img) ? img : pic
+}
+
 function Blog() {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -71,11 +77,18 @@ function Blog() {
                 data: { id: blogID },
             })
                 .then((response) => {
-                    setTitle(response.data.message.Item.Title.S)
-                    setContent(response.data.message.Item.Content.S)
-                    setDate(response.data.message.Item.Date.S)
-                    setAuthor(response.data.message.Item.Author.S)
-                    setFeaturedImage(response.data.message.Item.Feature_Img)
+                    const {
+                        data: {
+                            message: { Item },
+                        },
+                    } = response
+
+                    console.log(Item)
+                    setTitle(Item.Title.S)
+                    setContent(Item.Content.S)
+                    setDate(Item.Date.S)
+                    setFeaturedImage(Item.Feature_Img.S)
+                    setAuthor(Item.Author.S)
                 })
                 .catch((err) => console.log(err))
         }
@@ -125,7 +138,7 @@ function Blog() {
                         </div>
                     </div>
                     <div id='image'>
-                        <img id='featured-image' src={pic} />
+                        <img id='featured-image' src={getImg(featuredImage)} />
                         <div>Image Courtesy: Leon Tusk</div>
                     </div>
 

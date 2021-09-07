@@ -5,10 +5,9 @@ import { ReactComponent as CloseIcon } from '../../../assets/close-icon.svg'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import './newBlog.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useUser } from '../../Contexts/UserContext'
 import Modal from '../../Global/Modal'
-import useTimeout from '../../../hooks/useTimeout'
 import ModalSwitch from './ModalSwitch'
 
 export default function NewBlog() {
@@ -29,16 +28,9 @@ export default function NewBlog() {
     const [description, setDescription] = useState('')
     const [rawContent, setRawContent] = useState('')
 
+    const [submitted, setSubmitted] = useState(false)
+
     const [showModal, setShowModal] = useState(false)
-
-    const history = useHistory()
-
-    useTimeout(() => {
-        if (showModal) {
-            setShowModal(false)
-            history.push('/')
-        }
-    }, 10000)
 
     const handleSubmitBlog = async (e) => {
         e.preventDefault()
@@ -54,6 +46,7 @@ export default function NewBlog() {
         setSubmitLoading(false)
 
         if (result) {
+            setSubmitted(true)
             setShowModal(true)
         } else {
             setSubmitError('Submit Failed, Try Again Later!')
@@ -73,6 +66,7 @@ export default function NewBlog() {
 
         if (result) {
             // show modal
+            setSubmitted(true)
             setShowModal(true)
         } else {
             setSubmitError('Failed to save draft, try again later!')
@@ -98,7 +92,12 @@ export default function NewBlog() {
             return
         }
         setFileDescription(fileList[0].name)
+
+        setImageUploadLoading(true)
+        setShowModal(true)
         const newLink = await getImgurLink(fileList[0])
+        setShowModal(false)
+        setImageUploadLoading(false)
 
         if (newLink.success) {
             setPreviewURL(newLink.link)
@@ -131,7 +130,10 @@ export default function NewBlog() {
         }
 
         setImageUploadLoading(true)
+        setShowModal(true)
         const newLink = await getImgurLink(fileList[0])
+        setShowModal(false)
+        setImageUploadLoading(false)
 
         if (newLink.success) {
             setRawContent(
@@ -142,7 +144,6 @@ export default function NewBlog() {
         } else {
             setImageUploadError(true)
         }
-        setImageUploadLoading(false)
     }
 
     function handleNewUpload(e) {
@@ -296,11 +297,15 @@ export default function NewBlog() {
             <Modal
                 showModal={showModal}
                 setShowModal={setShowModal}
-                allowRemove={!!submitError}
+                allowRemove={!!submitError || !!imageUploadError}
             >
                 <ModalSwitch
                     submitLoading={submitLoading}
                     submitError={submitError}
+                    imageUploadError={imageUploadError}
+                    imageUploadLoading={imageUploadLoading}
+                    submitted={submitted}
+                    setShowModal={setShowModal}
                 />
             </Modal>
         </>
