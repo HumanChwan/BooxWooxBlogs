@@ -45,13 +45,13 @@ function Blog(blog) {
                 </div>
 
                 <div class='footing'>
-                    <a href='#' className='author'>
+                    <a href='/' className='author'>
                         <i class='fa fa-user'></i> {blog.author}
                     </a>
-                    <a href='#' className='tags'>
+                    <a href='/' className='tags'>
                         <i class='fa fa-tag fa-flip-horizontal'></i> {blog.tags}
                     </a>
-                    <a href='#' className='time'>
+                    <a href='/' className='time'>
                         <i class='fa fa-clock-o'></i> {blog.time}
                     </a>
                 </div>
@@ -82,6 +82,7 @@ const Blogs = ({ blogs, loading, error }) => {
             />
         ))
         setBlogHolding([...heldBlogs])
+        // eslint-disable-next-line
     }, [blogs])
 
     if (loading) {
@@ -145,6 +146,7 @@ function Pagination() {
             loopWithSlice(next, newNext)
             setNext(newNext)
         }
+        // eslint-disable-next-line
     }, [blogs])
 
     const handleShowMoreBlogs = () => {
@@ -164,7 +166,7 @@ function Pagination() {
                 }
                 onClick={handleShowMoreBlogs}
             >
-                <a id='load'>Load more</a>
+                <i id='load'>Load more</i>
             </div>
         </div>
     )

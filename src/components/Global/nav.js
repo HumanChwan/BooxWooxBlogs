@@ -75,7 +75,7 @@ function Navbar() {
                                 id='user'
                                 onClick={() => setShowUserMenu(!showUserMenu)}
                             >
-                                <img id='prof-pic' src={profPic} />
+                                <img id='prof-pic' src={profPic} alt='author' />
                                 {user.username}
                             </div>
                         </div>
@@ -89,15 +89,15 @@ function Navbar() {
                     tabIndex='0'
                 >
                     <Link to='/' className='user-menu-item'>
-                        <img src={userIcon} class='icon' />
+                        <img src={userIcon} class='icon' alt='user-icon' />
                         My Account
                     </Link>
                     <Link className='user-menu-item'>
-                        <img src={pen} class='icon' />
+                        <img src={pen} class='icon' alt='pen-icon' />
                         My Blogs
                     </Link>
                     <Link className='user-menu-item'>
-                        <img src={drafts} class='icon' />
+                        <img src={drafts} class='icon' alt='draft-icon' />
                         My Drafts
                     </Link>
                     <Link
@@ -107,7 +107,7 @@ function Navbar() {
                             setShowUserMenu(false)
                         }}
                     >
-                        <img src={logout} class='icon' />
+                        <img src={logout} class='icon' alt='logout-icon' />
                         Logout
                     </Link>
                 </div>
@@ -162,7 +162,11 @@ function Navbar() {
                                         setShowUserMenuSide(!showUserMenuSide)
                                     }
                                 >
-                                    <img id='prof-pic' src={profPic} />
+                                    <img
+                                        id='prof-pic'
+                                        src={profPic}
+                                        alt='author'
+                                    />
                                     {user.username}
                                     <img
                                         id={
@@ -170,6 +174,7 @@ function Navbar() {
                                                 ? 'chevron-up-username'
                                                 : 'chevron-down-username'
                                         }
+                                        alt='chevron'
                                         src={chevronDown}
                                     />
                                 </div>
@@ -182,15 +187,27 @@ function Navbar() {
                                         tabIndex='0'
                                     >
                                         <Link to='/' className='user-menu-item'>
-                                            <img src={userIcon} class='icon' />
+                                            <img
+                                                src={userIcon}
+                                                class='icon'
+                                                alt='user-icon'
+                                            />
                                             My Account
                                         </Link>
                                         <Link className='user-menu-item'>
-                                            <img src={pen} class='icon' />
+                                            <img
+                                                src={pen}
+                                                class='icon'
+                                                alt='pen-icon'
+                                            />
                                             My Blogs
                                         </Link>
                                         <Link className='user-menu-item'>
-                                            <img src={drafts} class='icon' />
+                                            <img
+                                                src={drafts}
+                                                class='icon'
+                                                alt='draft-icon'
+                                            />
                                             My Drafts
                                         </Link>
                                         <Link
@@ -200,7 +217,11 @@ function Navbar() {
                                                 setShowUserMenu(false)
                                             }}
                                         >
-                                            <img src={logout} class='icon' />
+                                            <img
+                                                src={logout}
+                                                class='icon'
+                                                alt='logout-icon'
+                                            />
                                             Logout
                                         </Link>
                                     </div>

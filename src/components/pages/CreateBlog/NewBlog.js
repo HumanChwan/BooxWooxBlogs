@@ -28,8 +28,6 @@ export default function NewBlog() {
     const [description, setDescription] = useState('')
     const [rawContent, setRawContent] = useState('')
 
-    const [submitted, setSubmitted] = useState(false)
-
     const [showModal, setShowModal] = useState(false)
 
     const handleSubmitBlog = async (e) => {
@@ -46,7 +44,6 @@ export default function NewBlog() {
         setSubmitLoading(false)
 
         if (result) {
-            setSubmitted(true)
             setShowModal(true)
         } else {
             setSubmitError('Submit Failed, Try Again Later!')
@@ -66,7 +63,6 @@ export default function NewBlog() {
 
         if (result) {
             // show modal
-            setSubmitted(true)
             setShowModal(true)
         } else {
             setSubmitError('Failed to save draft, try again later!')
@@ -82,6 +78,22 @@ export default function NewBlog() {
         setFileDescription('')
     }
 
+    const getLinkOfImage = async (file) => {
+        setImageUploadLoading(true)
+        setShowModal(true)
+        let newLink
+        try {
+            newLink = await getImgurLink(file)
+        } catch (e) {
+            newLink = { success: false }
+        } finally {
+            setShowModal(false)
+            setImageUploadLoading(false)
+        }
+
+        return newLink
+    }
+
     const handleLocalUpload = async (fileList) => {
         if (fileList.length <= 0) {
             return
@@ -93,12 +105,7 @@ export default function NewBlog() {
         }
         setFileDescription(fileList[0].name)
 
-        setImageUploadLoading(true)
-        setShowModal(true)
-        const newLink = await getImgurLink(fileList[0])
-        setShowModal(false)
-        setImageUploadLoading(false)
-
+        const newLink = await getLinkOfImage(fileList[0])
         if (newLink.success) {
             setPreviewURL(newLink.link)
             setFiles([...fileList])
@@ -129,11 +136,7 @@ export default function NewBlog() {
             return
         }
 
-        setImageUploadLoading(true)
-        setShowModal(true)
-        const newLink = await getImgurLink(fileList[0])
-        setShowModal(false)
-        setImageUploadLoading(false)
+        const newLink = await getLinkOfImage(fileList[0])
 
         if (newLink.success) {
             setRawContent(
@@ -142,6 +145,7 @@ export default function NewBlog() {
                     `![${fileList[0].name}](${newLink.link})\n\n`
             )
         } else {
+            setShowModal(true)
             setImageUploadError(true)
         }
     }
@@ -304,8 +308,9 @@ export default function NewBlog() {
                     submitError={submitError}
                     imageUploadError={imageUploadError}
                     imageUploadLoading={imageUploadLoading}
-                    submitted={submitted}
                     setShowModal={setShowModal}
+                    setSubmitError={setSubmitError}
+                    setImageUploadError={setImageUploadError}
                 />
             </Modal>
         </>

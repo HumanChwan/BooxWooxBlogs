@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
+import React from 'react'
 import ErrorSubmit from './ErrorSubmit'
 import SubmitLoading from './SubmitLoading'
 import SuccessModal from './SuccessModal'
@@ -9,32 +8,25 @@ const ModalSwitch = ({
     submitError,
     imageUploadLoading,
     imageUploadError,
-    submitted,
     setShowModal,
+    setSubmitError,
+    setImageUploadError,
 }) => {
-    const history = useHistory()
-    useEffect(() => {
-        if (submitted) {
-            const id = setTimeout(() => {
-                history.push('/')
-                setShowModal(false)
-            }, 10000)
-
-            return () => {
-                clearTimeout(id)
-            }
-        }
-    }, [submitted])
-
     if (submitLoading || imageUploadLoading) {
         return <SubmitLoading />
     }
 
     if (submitError || imageUploadError) {
-        return <ErrorSubmit />
+        return (
+            <ErrorSubmit
+                error={'Could not upload! Try again later'}
+                setSubmitError={setSubmitError}
+                setImageUploadError={setImageUploadError}
+            />
+        )
     }
 
-    return <SuccessModal />
+    return <SuccessModal setShowModal={setShowModal} />
 }
 
 export default ModalSwitch

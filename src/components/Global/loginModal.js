@@ -12,7 +12,7 @@ import verticalLine from '../../assets/verticle-line.svg'
 import tick from '../../assets/tick-symbol.svg'
 
 function LoginModal({ showOverlay, setShowOverlay }) {
-    const { user, setUser } = useUser()
+    const { setUser } = useUser()
     const newUser = { username: 'silverduck04' }
 
     const [OTPToken, setOTPToken] = useState('')
@@ -88,12 +88,12 @@ function LoginModal({ showOverlay, setShowOverlay }) {
 
     function handleOTP() {
         if (
-            dig1.current.value == '' ||
-            dig2.current.value == '' ||
-            dig3.current.value == '' ||
-            dig4.current.value == '' ||
-            dig5.current.value == '' ||
-            dig6.current.value == ''
+            dig1.current.value === '' ||
+            dig2.current.value === '' ||
+            dig3.current.value === '' ||
+            dig4.current.value === '' ||
+            dig5.current.value === '' ||
+            dig6.current.value === ''
         ) {
             setShowOTPError(true)
         } else {
@@ -192,12 +192,13 @@ function LoginModal({ showOverlay, setShowOverlay }) {
     useEffect(() => {
         if (!showOTP) return
         var timerID = setInterval(counter, 1000)
-        if (time == 0) {
+        if (time === 0) {
             clearInterval(timerID)
         }
         return () => {
             clearInterval(timerID)
         }
+        // eslint-disable-next-line
     }, [showOTP])
 
     function handleIt(item) {
@@ -254,6 +255,7 @@ function LoginModal({ showOverlay, setShowOverlay }) {
                         }}
                         id='x'
                         src={x}
+                        alt='x'
                     />
                 </div>
                 <div id='enter-your-pn'>Enter your phone number</div>
@@ -266,8 +268,13 @@ function LoginModal({ showOverlay, setShowOverlay }) {
                         <img
                             id={showCodesList ? 'chevron-up' : 'chevron-down'}
                             src={chevronDown}
+                            alt='chevron'
                         />
-                        <img id='vertical-line' src={verticalLine} />
+                        <img
+                            id='vertical-line'
+                            src={verticalLine}
+                            alt='verticle-line'
+                        />
                     </div>
                     <input
                         id='input-pn'
@@ -308,6 +315,7 @@ function LoginModal({ showOverlay, setShowOverlay }) {
                             setShowOTP(false)
                             setShowLogin(true)
                         }}
+                        alt='back-arrow'
                     />
                     Login/Signup
                 </div>
@@ -413,11 +421,11 @@ function LoginModal({ showOverlay, setShowOverlay }) {
                 >
                     *The entered OTP is wrong, please try again
                 </div>
-                <div id={time != 0 ? 'resend' : 'resend-inactive'}>
+                <div id={time !== 0 ? 'resend' : 'resend-inactive'}>
                     Resend in <div id='time-left'>{timeLeft}</div>
                 </div>
                 <div
-                    id={time == 0 ? 'resend-otp' : 'resend-inactive'}
+                    id={time === 0 ? 'resend-otp' : 'resend-inactive'}
                     onClick={resendOTP}
                 >
                     Resend OTP
@@ -445,7 +453,7 @@ function LoginModal({ showOverlay, setShowOverlay }) {
                     modalSuccess ? 'modal-prompt' : 'modal-prompt-inactive'
                 }
             >
-                <img src={tick} height='60' />
+                <img src={tick} height='60' alt='tick' alt='tick' />
                 <div>Successfully logged in!</div>
             </div>
 
@@ -462,6 +470,7 @@ function LoginModal({ showOverlay, setShowOverlay }) {
                         setShowOverlay(false)
                         setShowLogin(true)
                     }}
+                    alt='error-box'
                 />
                 <div>
                     Oops! There seems to be an error.

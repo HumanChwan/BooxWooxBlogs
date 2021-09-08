@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import rehypeRaw from 'rehype-raw'
 import ReactMarkdown from 'react-markdown'
@@ -99,7 +99,7 @@ function Blog() {
     return (
         <div id='page'>
             <div id='author-info'>
-                <img id='profilepic' src={authorPic} />
+                <img id='profilepic' src={authorPic} alt='author' />
                 <div id='info'>
                     <div id='username-blog'>silverduck04</div>
                     <div id='badge-info'>Silver Badge Owner</div>
@@ -120,8 +120,8 @@ function Blog() {
                         <hr />
                     </div>
                     <div id='icons'>
-                        <img id='like' src={heart} />
-                        <img id='share' src={share} />
+                        <img id='like' src={heart} alt='heart' />
+                        <img id='share' src={share} alt='share' />
                     </div>
                 </div>
                 <div id='content'>
@@ -133,12 +133,16 @@ function Blog() {
                             </div>
                             <div id='views'>
                                 {' '}
-                                <img id='eye' src={eye} /> 204
+                                <img id='eye' src={eye} alt='eye' /> 204
                             </div>
                         </div>
                     </div>
                     <div id='image'>
-                        <img id='featured-image' src={getImg(featuredImage)} />
+                        <img
+                            id='featured-image'
+                            src={getImg(featuredImage)}
+                            alt='featured-img'
+                        />
                         <div>Image Courtesy: Leon Tusk</div>
                     </div>
 
@@ -176,7 +180,7 @@ function Blog() {
                             <div id='post'>Post</div>
                         </div>
                         <div id='replies'>
-                            <img id='userpic' src={authorPic} />
+                            <img id='userpic' src={authorPic} alt='author' />
                             <div>
                                 <div id='profile-name'>silverduck04</div>
                                 <div id='comment'>
@@ -198,6 +202,7 @@ function Blog() {
                                                 ? 'chevron-up'
                                                 : 'chevron-down'
                                         }
+                                        alt='chevron'
                                         src={chevronDown}
                                     />
                                 </div>

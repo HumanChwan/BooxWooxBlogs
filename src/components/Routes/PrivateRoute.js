@@ -9,6 +9,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         if (!user) {
             setShowOverlay(true)
         }
+        // eslint-disable-next-line
     }, [])
 
     return (
