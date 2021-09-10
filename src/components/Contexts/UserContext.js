@@ -8,7 +8,7 @@ export const useUser = () => {
 }
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState({ username: 'silverduck04' })
+    const [user, setUser] = useState()
     const [showOverlay, setShowOverlay] = useState(false)
     const [accessToken, setAccessToken] = useState(
         process.env.REACT_APP_ACCESS_TOKEN
