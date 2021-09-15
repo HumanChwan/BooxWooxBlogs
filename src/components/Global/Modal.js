@@ -7,14 +7,12 @@ const Modal = ({ showModal, setShowModal, children, allowRemove }) => {
     const backgroundRef = useRef()
 
     useEventListener('keydown', (e) => {
-        console.log(allowRemove)
         if (e.key === 'Escape' && allowRemove) {
             setShowModal(false)
         }
     })
 
     useEventListener('mousedown', (e) => {
-        console.log(allowRemove)
         if (e.target === backgroundRef.current && allowRemove) {
             setShowModal(false)
         }
