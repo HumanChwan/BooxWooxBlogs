@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 import { useUser } from '../../Contexts/UserContext'
 import Modal from '../../Global/Modal'
 import ModalSwitch from './ModalSwitch'
-import useEventListener from '../../../hooks/useEventListener'
 
 export default function NewBlog() {
   const { uploadBlog, getImgurLink } = useUser()
@@ -143,7 +142,7 @@ export default function NewBlog() {
 
     if (newLink.success) {
       setRawContent(
-        rawContent + '\n' + `![${fileList[0].name}](${newLink.link})\n\n`
+        rawContent + `\n![${fileList[0].name}](${newLink.link})\n\n`
       )
     } else {
       setShowModal(true)
@@ -161,7 +160,7 @@ export default function NewBlog() {
     textAreaRef.current.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') {
         e.preventDefault()
-        setRawContent(rawContent => rawContent + '\t')
+        setRawContent((rawContent) => rawContent + '\t')
       }
     })
   }, [])

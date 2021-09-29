@@ -13,230 +13,203 @@ import { useUser } from '../Contexts/UserContext'
 import LoginModal from './loginModal'
 
 function Navbar() {
-    // const [OTPToken, setOTPToken] = useState("");
-    // const [loginToken, setLoginToken] = useState("");
-    const { user, setUser, showOverlay, setShowOverlay } = useUser()
+  // const [OTPToken, setOTPToken] = useState("");
+  // const [loginToken, setLoginToken] = useState("");
+  const { user, setUser, showOverlay, setShowOverlay } = useUser()
 
-    const [click, setClick] = useState(false)
+  const [click, setClick] = useState(false)
 
-    const iconChange = () => setClick((prevClick) => !prevClick)
-    const closeSideMenu = () => setClick(false)
+  const iconChange = () => setClick((prevClick) => !prevClick)
+  const closeSideMenu = () => setClick(false)
 
-    const checkSideMenuSize = () => {
-        if (window.innerWidth >= 800) {
-            closeSideMenu()
-        }
+  const checkSideMenuSize = () => {
+    if (window.innerWidth >= 800) {
+      closeSideMenu()
     }
+  }
 
-    window.addEventListener('resize', checkSideMenuSize)
-    window.addEventListener('scroll', closeSideMenu)
+  window.addEventListener('resize', checkSideMenuSize)
+  window.addEventListener('scroll', closeSideMenu)
 
-    const [showUserMenu, setShowUserMenu] = useState(false)
-    const [showUserMenuSide, setShowUserMenuSide] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showUserMenuSide, setShowUserMenuSide] = useState(false)
 
-    return (
-        // <div>
-        <div className='nav-container'>
-            <nav className='navbar'>
-                <div className='logo' onClick={closeSideMenu}>
-                    <Link to='/'>
-                        <img src={logo} alt='logo' />
-                    </Link>
-                </div>
+  return (
+    // <div>
+    <div className='nav-container'>
+      <nav className='navbar'>
+        <div className='logo' onClick={closeSideMenu}>
+          <Link to='/'>
+            <img src={logo} alt='logo' />
+          </Link>
+        </div>
 
-                <div className='menu-bar-icon' onClick={iconChange}>
-                    <i className={click ? 'fa fa-times' : 'fa fa-bars'} />
-                </div>
+        <div className='menu-bar-icon' onClick={iconChange}>
+          <i className={click ? 'fa fa-times' : 'fa fa-bars'} />
+        </div>
 
-                <div className='nav-row'>
-                    <Link to='/features' className='nav-link' id='feat'>
-                        Features
-                    </Link>
-                    <Link to='/blogs' className='nav-link' id='blog'>
-                        Blogs
-                    </Link>
-                    <Link to='/downloads' className='nav-link' id='down'>
-                        Downloads
-                    </Link>
-                    {!user ? (
-                        <Link
-                            className='nav-link-side'
-                            id='log-side'
-                            onClick={() => {
-                                closeSideMenu()
-                                setShowOverlay(!showOverlay)
-                            }}
-                        >
-                            Login
-                        </Link>
-                    ) : (
-                        <div id='user-side'>
-                            <div
-                                id='user'
-                                onClick={() => setShowUserMenu(!showUserMenu)}
-                            >
-                                <img id='prof-pic' src={profPic} alt='author' />
-                                {user.username}
-                            </div>
-                        </div>
-                    )}
-                </div>
+        <div className='nav-row'>
+          <Link to='/features' className='nav-link' id='feat'>
+            Features
+          </Link>
+          <Link to='/blogs' className='nav-link' id='blog'>
+            Blogs
+          </Link>
+          <Link to='/downloads' className='nav-link' id='down'>
+            Downloads
+          </Link>
+          {!user ? (
+            <Link
+              className='nav-link-side'
+              id='log-side'
+              onClick={() => {
+                closeSideMenu()
+                setShowOverlay(!showOverlay)
+              }}
+            >
+              Login
+            </Link>
+          ) : (
+            <div id='user-side'>
+              <div id='user' onClick={() => setShowUserMenu(!showUserMenu)}>
+                <img id='prof-pic' src={profPic} alt='author' />
+                {user.username}
+              </div>
+            </div>
+          )}
+        </div>
+        <div
+          id={showUserMenu ? 'user-menu' : 'user-menu-inactive'}
+          onBlur={() => {
+            setShowUserMenu(false)
+          }}
+          tabIndex='0'
+        >
+          <Link to='/' className='user-menu-item'>
+            <img src={userIcon} className='icon' alt='user-icon' />
+            My Account
+          </Link>
+          <Link className='user-menu-item'>
+            <img src={pen} className='icon' alt='pen-icon' />
+            My Blogs
+          </Link>
+          <Link className='user-menu-item'>
+            <img src={drafts} className='icon' alt='draft-icon' />
+            My Drafts
+          </Link>
+          <Link
+            className='user-menu-item'
+            onClick={() => {
+              setUser(undefined)
+              setShowUserMenu(false)
+            }}
+          >
+            <img src={logout} className='icon' alt='logout-icon' />
+            Logout
+          </Link>
+        </div>
+      </nav>
+      <div id='side-menu-container'>
+        <ul className={click ? 'side-menu-active' : 'side-menu'}>
+          <li className='side-menu-item'>
+            <Link
+              to='/features'
+              className='nav-link-side'
+              onClick={closeSideMenu}
+            >
+              Features
+            </Link>
+          </li>
+          <li className='side-menu-item'>
+            <Link
+              to='/blogs'
+              className='nav-link-side'
+              id='blog-side'
+              onClick={closeSideMenu}
+            >
+              Blogs
+            </Link>
+          </li>
+          <li className='side-menu-item'>
+            <Link
+              to='/downloads'
+              className='nav-link-side'
+              onClick={closeSideMenu}
+            >
+              Downloads
+            </Link>
+          </li>
+          <li className='side-menu-item'>
+            {!user ? (
+              <span
+                className='nav-link-side'
+                id='log-side'
+                onClick={() => {
+                  closeSideMenu()
+                  setShowOverlay(!showOverlay)
+                }}
+              >
+                Login
+              </span>
+            ) : (
+              <div id='side-user'>
                 <div
-                    id={showUserMenu ? 'user-menu' : 'user-menu-inactive'}
+                  id='username-side'
+                  onClick={() => setShowUserMenuSide(!showUserMenuSide)}
+                >
+                  <img id='prof-pic' src={profPic} alt='author' />
+                  {user.username}
+                  <img
+                    id={
+                      showUserMenuSide
+                        ? 'chevron-up-username'
+                        : 'chevron-down-username'
+                    }
+                    alt='chevron'
+                    src={chevronDown}
+                  />
+                </div>
+                {showUserMenuSide ? (
+                  <div
+                    id='user-menu-side'
                     onBlur={() => {
-                        setShowUserMenu(false)
+                      setShowUserMenu(false)
                     }}
                     tabIndex='0'
-                >
-                    <Link to='/' className='user-menu-item'>
-                        <img src={userIcon} class='icon' alt='user-icon' />
-                        My Account
+                  >
+                    <Link to='/my-account' className='user-menu-item'>
+                      <img src={userIcon} className='icon' alt='user-icon' />
+                      My Account
                     </Link>
-                    <Link className='user-menu-item'>
-                        <img src={pen} class='icon' alt='pen-icon' />
-                        My Blogs
+                    <Link to='/my-blogs' className='user-menu-item'>
+                      <img src={pen} className='icon' alt='pen-icon' />
+                      My Blogs
                     </Link>
-                    <Link className='user-menu-item'>
-                        <img src={drafts} class='icon' alt='draft-icon' />
-                        My Drafts
+                    <Link to='/my-drafts' className='user-menu-item'>
+                      <img src={drafts} className='icon' alt='draft-icon' />
+                      My Drafts
                     </Link>
                     <Link
-                        className='user-menu-item'
-                        onClick={() => {
-                            setUser(undefined)
-                            setShowUserMenu(false)
-                        }}
+                      to='/'
+                      className='user-menu-item'
+                      onClick={() => {
+                        setUser(undefined)
+                        setShowUserMenu(false)
+                      }}
                     >
-                        <img src={logout} class='icon' alt='logout-icon' />
-                        Logout
+                      <img src={logout} className='icon' alt='logout-icon' />
+                      Logout
                     </Link>
-                </div>
-            </nav>
-            <div id='side-menu-container'>
-                <ul className={click ? 'side-menu-active' : 'side-menu'}>
-                    <li className='side-menu-item'>
-                        <Link
-                            to='/features'
-                            className='nav-link-side'
-                            onClick={closeSideMenu}
-                        >
-                            Features
-                        </Link>
-                    </li>
-                    <li className='side-menu-item'>
-                        <Link
-                            to='/blogs'
-                            className='nav-link-side'
-                            id='blog-side'
-                            onClick={closeSideMenu}
-                        >
-                            Blogs
-                        </Link>
-                    </li>
-                    <li className='side-menu-item'>
-                        <Link
-                            to='/downloads'
-                            className='nav-link-side'
-                            onClick={closeSideMenu}
-                        >
-                            Downloads
-                        </Link>
-                    </li>
-                    <li className='side-menu-item'>
-                        {!user ? (
-                            <Link
-                                className='nav-link-side'
-                                id='log-side'
-                                onClick={() => {
-                                    closeSideMenu()
-                                    setShowOverlay(!showOverlay)
-                                }}
-                            >
-                                Login
-                            </Link>
-                        ) : (
-                            <div id='side-user'>
-                                <div
-                                    id='username-side'
-                                    onClick={() =>
-                                        setShowUserMenuSide(!showUserMenuSide)
-                                    }
-                                >
-                                    <img
-                                        id='prof-pic'
-                                        src={profPic}
-                                        alt='author'
-                                    />
-                                    {user.username}
-                                    <img
-                                        id={
-                                            showUserMenuSide
-                                                ? 'chevron-up-username'
-                                                : 'chevron-down-username'
-                                        }
-                                        alt='chevron'
-                                        src={chevronDown}
-                                    />
-                                </div>
-                                {showUserMenuSide ? (
-                                    <div
-                                        id='user-menu-side'
-                                        onBlur={() => {
-                                            setShowUserMenu(false)
-                                        }}
-                                        tabIndex='0'
-                                    >
-                                        <Link to='/' className='user-menu-item'>
-                                            <img
-                                                src={userIcon}
-                                                class='icon'
-                                                alt='user-icon'
-                                            />
-                                            My Account
-                                        </Link>
-                                        <Link className='user-menu-item'>
-                                            <img
-                                                src={pen}
-                                                class='icon'
-                                                alt='pen-icon'
-                                            />
-                                            My Blogs
-                                        </Link>
-                                        <Link className='user-menu-item'>
-                                            <img
-                                                src={drafts}
-                                                class='icon'
-                                                alt='draft-icon'
-                                            />
-                                            My Drafts
-                                        </Link>
-                                        <Link
-                                            className='user-menu-item'
-                                            onClick={() => {
-                                                setUser(undefined)
-                                                setShowUserMenu(false)
-                                            }}
-                                        >
-                                            <img
-                                                src={logout}
-                                                class='icon'
-                                                alt='logout-icon'
-                                            />
-                                            Logout
-                                        </Link>
-                                    </div>
-                                ) : null}
-                            </div>
-                        )}
-                    </li>
-                </ul>
-            </div>
-            <LoginModal
-                showOverlay={showOverlay}
-                setShowOverlay={setShowOverlay}
-            />
-        </div>
-    )
+                  </div>
+                ) : null}
+              </div>
+            )}
+          </li>
+        </ul>
+      </div>
+      <LoginModal showOverlay={showOverlay} setShowOverlay={setShowOverlay} />
+    </div>
+  )
 }
 
 export default Navbar

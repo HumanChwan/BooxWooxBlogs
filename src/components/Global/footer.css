@@ -87,6 +87,7 @@
   height: 21px;
   width: 17px;
   margin-right: 1rem;
+  margin-top: 0.25rem;
 }
 
 .pin-symb {
@@ -114,7 +115,9 @@
 }
 
 .footer__lower {
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: 1rem 0;
   text-align: center;
+
+  opacity: 60%;
 }

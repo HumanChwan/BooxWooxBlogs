@@ -14,14 +14,16 @@ export const UserProvider = ({ children }) => {
     process.env.REACT_APP_ACCESS_TOKEN
   )
 
+  const HEADERS = {
+    headers: { Authorization: `bearer ${process.env.REACT_APP_AUTH_TOKEN}` },
+  }
+
   const uploadBlog = async (blogData) => {
     console.log(blogData)
     const response = await axios({
       method: 'POST',
       url: process.env.REACT_APP_WRITE_BLOG_ENDPOINT,
-      headers: {
-        Authorization: `bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
-      },
+      ...HEADERS,
       data: blogData,
     })
 
@@ -61,6 +63,7 @@ export const UserProvider = ({ children }) => {
     setShowOverlay,
     uploadBlog,
     getImgurLink,
+    HEADERS,
   }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>

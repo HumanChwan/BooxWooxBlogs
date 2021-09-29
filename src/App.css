@@ -12,6 +12,7 @@
   --hover-color: #777;
   --error-color: #ee0000;
   --padded-width: calc(1440px - 3rem);
+  --transition-time: 150ms;
 }
 @media screen and (max-width: 1100px) {
   :root {

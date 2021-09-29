@@ -5,34 +5,34 @@ import { useUser } from './UserContext'
 const AuthContext = createContext()
 
 export const useAuth = () => {
-    return useContext(AuthContext)
+  return useContext(AuthContext)
 }
 
 export const AuthProvider = ({ children }) => {
-    const { setUser } = useUser()
+  const { setUser } = useUser({ username: 'silverduck' })
 
-    const login = async (number) => {
-        const response = await axios({
-            method: 'POST',
-            data: {
-                phoneNumber: number,
-            },
-            url: 'hmm.com',
-            withCredentials: true,
-        })
+  const login = async (number) => {
+    const response = await axios({
+      method: 'POST',
+      data: {
+        phoneNumber: number,
+      },
+      url: 'hmm.com',
+      withCredentials: true,
+    })
 
-        const data = response.data
+    const data = response.data
 
-        if (data.success) {
-            // smth not-sure
-            // perhaps: setUser({ ...data.user })
-        }
+    if (data.success) {
+      // smth not-sure
+      // perhaps: setUser({ ...data.user })
     }
+  }
 
-    const logout = () => {
-        setUser(undefined)
-    }
+  const logout = () => {
+    setUser(undefined)
+  }
 
-    const value = { login, logout }
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  const value = { login, logout }
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
