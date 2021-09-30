@@ -57,7 +57,10 @@
 }
 
 @keyframes sen {
-  0% {opacity: 0%; transform: translateX(100px);}
+  0% {
+    opacity: 0%;
+    transform: translateX(100px);
+  }
 }
 
 @media screen and (max-width: 800px) {
@@ -66,7 +69,7 @@
     padding: 0 1.5rem;
   }
   #sen {
-    padding-bottom: 3rem;
+    padding-bottom: 6rem;
     font-size: 24px;
   }
 }

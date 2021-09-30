@@ -246,7 +246,7 @@
   width: 65%;
 }
 
-#side {
+#side-wrapper {
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
@@ -254,15 +254,28 @@
   line-height: 33px;
   color: #000000;
   width: 35%;
+
+  position: relative;
 }
 
-#side ol {
+#side-wrapper ol {
   margin-left: 100px;
 }
 
+.side {
+  /* margin-top: 7rem; */
+  width: 100%;
+  height: max-content;
+  position: sticky;
+  top: 7rem;
+
+  margin-bottom: 3rem;
+  margin-left: 4rem;
+}
+
 #categories {
-  margin-top: 20px;
-  margin-left: 50%;
+  /* margin-top: 20px; */
+  margin-left: 2rem;
 }
 
 #load {
@@ -332,10 +345,16 @@
   z-index: 9;
 }
 
+#drop-title {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 1rem;
+}
+
 #drop-down {
   position: relative;
   z-index: 3;
-  margin-top: 50px;
   margin-left: 20px;
   width: fit-content;
   font-family: Roboto;
@@ -345,6 +364,8 @@
   line-height: 20px;
   color: #000000;
   cursor: pointer;
+
+  margin-right: 1rem;
 }
 
 #down-arrow {
@@ -354,19 +375,18 @@
 }
 
 #side-menu {
-  position: absolute;
   z-index: 1;
   margin-left: 5%;
-  margin-top: 70px;
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
-  font-size: 2vi;
-  line-height: 10vi;
   color: #000000;
+
+  margin-bottom: 2rem;
 }
 
 #side-menu li {
+  align-self: flex-start;
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
@@ -399,6 +419,9 @@
 #category-head {
   margin-bottom: 6px;
   font-weight: bolder;
+
+  width: max-content;
+  border-bottom: 3px solid #000;
 }
 
 #link {
@@ -445,11 +468,8 @@
 
 #sort-direction {
   scale: 0.6;
-  position: absolute;
-  left: 85%;
-  top: 120px;
+  right: 0;
   cursor: pointer;
-  float: right;
   margin-left: 4px;
 }
 
@@ -650,19 +670,19 @@
 }
 
 #subscribe-form {
-  position: absolute;
   z-index: 1;
-  top: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: fit-content;
+
+  position: relative;
 }
 
 #mail-label {
   position: absolute;
-  left: 13%;
+  left: 1.75rem;
   top: 30px;
   top: 0.875rem;
 }

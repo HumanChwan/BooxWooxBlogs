@@ -126,11 +126,4 @@
   .home__section2__subscribe__form > h3 {
     padding: 0;
   }
-  .home__section2__subscribe__form__input {
-    width: 80%;
-    margin: 0 2rem 2rem;
-  }
-  .mail-input-label {
-    left: -1rem;
-  }
 }
