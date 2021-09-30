@@ -263,8 +263,6 @@
 }
 
 .side {
-  /* margin-top: 7rem; */
-  width: 100%;
   height: max-content;
   position: sticky;
   top: 7rem;
@@ -274,7 +272,6 @@
 }
 
 #categories {
-  /* margin-top: 20px; */
   margin-left: 2rem;
 }
 

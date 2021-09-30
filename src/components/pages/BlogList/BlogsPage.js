@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './blogs.css'
-import mailSymb from '../../assets/mail-input-logo.svg'
+import mailSymb from '../../../assets/mail-input-logo.svg'
 import Pagination from './pagination'
 
-function BlogsPage() {
+function BlogsPage({ fetcher }) {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [])
@@ -169,7 +169,7 @@ function BlogsPage() {
             </Link>
             Blogs
           </div>
-          <Pagination />
+          <Pagination fetcher={fetcher} />
         </div>
 
         <div
