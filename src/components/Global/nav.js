@@ -35,9 +35,16 @@ function Navbar() {
   const [showUserMenuSide, setShowUserMenuSide] = useState(false)
 
   return (
-    // <div>
     <div className='nav-container'>
-      <nav className='navbar'>
+      <nav
+        className='navbar'
+        onBlur={() => {
+          setTimeout(() => {
+            setShowUserMenu(false)
+          }, 100)
+        }}
+        tabIndex='0'
+      >
         <div className='logo' onClick={closeSideMenu}>
           <Link to='/'>
             <img src={logo} alt='logo' />
@@ -59,7 +66,7 @@ function Navbar() {
             Downloads
           </Link>
           {!user ? (
-            <Link
+            <button
               className='nav-link-side'
               id='log-side'
               onClick={() => {
@@ -68,7 +75,7 @@ function Navbar() {
               }}
             >
               Login
-            </Link>
+            </button>
           ) : (
             <div id='user-side'>
               <div id='user' onClick={() => setShowUserMenu(!showUserMenu)}>
@@ -78,36 +85,33 @@ function Navbar() {
             </div>
           )}
         </div>
-        <div
-          id={showUserMenu ? 'user-menu' : 'user-menu-inactive'}
-          onBlur={() => {
-            setShowUserMenu(false)
-          }}
-          tabIndex='0'
-        >
-          <Link to='/' className='user-menu-item'>
-            <img src={userIcon} className='icon' alt='user-icon' />
-            My Account
-          </Link>
-          <Link className='user-menu-item'>
-            <img src={pen} className='icon' alt='pen-icon' />
-            My Blogs
-          </Link>
-          <Link className='user-menu-item'>
-            <img src={drafts} className='icon' alt='draft-icon' />
-            My Drafts
-          </Link>
-          <Link
-            className='user-menu-item'
-            onClick={() => {
-              setUser(undefined)
-              setShowUserMenu(false)
-            }}
-          >
-            <img src={logout} className='icon' alt='logout-icon' />
-            Logout
-          </Link>
-        </div>
+        {showUserMenu && (
+          <div id='user-menu'>
+            <Link to='/' className='user-menu-item'>
+              <img src={userIcon} className='icon' alt='user-icon' />
+              My Account
+            </Link>
+            <Link to='/my-blogs' className='user-menu-item'>
+              <img src={pen} className='icon' alt='pen-icon' />
+              My Blogs
+            </Link>
+            <Link to='/my-drafts' className='user-menu-item'>
+              <img src={drafts} className='icon' alt='draft-icon' />
+              My Drafts
+            </Link>
+            <Link
+              to='/'
+              className='user-menu-item'
+              onClick={() => {
+                setUser(undefined)
+                setShowUserMenu(false)
+              }}
+            >
+              <img src={logout} className='icon' alt='logout-icon' />
+              Logout
+            </Link>
+          </div>
+        )}
       </nav>
       <div id='side-menu-container'>
         <ul className={click ? 'side-menu-active' : 'side-menu'}>

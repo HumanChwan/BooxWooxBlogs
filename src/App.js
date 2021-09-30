@@ -9,6 +9,7 @@ import Blog from './components/pages/blog'
 import { UserProvider } from './components/Contexts/UserContext'
 import { AuthProvider } from './components/Contexts/AuthContext'
 import PrivateRoute from './components/Routes/PrivateRoute'
+import MyBlogs from './components/pages/MyBlogs'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path='/blogs' component={AllBlogs} />
               <PrivateRoute path='/create-blog' component={NewBlog} />
               <Route path='/blog' component={Blog} />
+              <PrivateRoute path='/my-blogs' component={MyBlogs} />
             </Switch>
             <Footer />
           </AuthProvider>

@@ -9,9 +9,9 @@ import chevronDown from '../../assets/chevron-down.svg'
 import authorPic from '../images/img-2.jpg'
 import pic from '../images/img-1.jpg'
 import dateFormatter from '../Global/dateFormatter'
-import './blog.css'
-import { useUser } from '../Contexts/UserContext'
 import Loader from 'react-loader-spinner'
+
+import './blog.css'
 
 const replies = [
   {
@@ -57,8 +57,6 @@ const getImg = (img) => {
 }
 
 function Blog() {
-  const { HEADERS } = useUser()
-
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
@@ -81,7 +79,7 @@ function Blog() {
     setContent(Item.Content.S)
     setDate(Item.Date.S)
     setFeaturedImage(Item.Feature_Img.S)
-    setAuthor(Item.Author?.S)
+    setAuthor(Item.Author.S)
   }
 
   useEffect(() => {
@@ -90,7 +88,6 @@ function Blog() {
         method: 'POST',
         url: process.env.REACT_APP_READ_SINGLE_BLOG_ENDPOINT,
         data: { id: blogID },
-        ...HEADERS,
       }
 
       try {
