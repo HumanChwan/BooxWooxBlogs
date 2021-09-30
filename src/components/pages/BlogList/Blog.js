@@ -1,16 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import icon from '../../images/bookmark.svg'
 import authorPic from '../../images/img-2.jpg'
 import pic from '../../images/img-1.jpg'
+import axios from 'axios'
+import { useUser } from '../../Contexts/UserContext'
 
 const isLink = (img) => img.includes('https://') || img.includes('http://')
 const getImg = (img) => {
   return isLink(img) ? img : pic
 }
-const Blog = (blog) => {
-  const handleLikeUpdate = () => {}
+
+const Blog = (blogProp) => {
+  const { HEADERS } = useUser()
+
+  const [blog, setBlog] = useState(blogProp)
+
+  const handleLikeUpdate = async () => {
+    const axiosOptions = {
+      method: 'PUT',
+      url: process.env.REACT_APP_LIKE_BLOG_ENDPOINT,
+      data: {
+        id: blog.id,
+        Likes: parseInt(blog.likes),
+      },
+      ...HEADERS,
+    }
+
+    try {
+      const response = await axios(axiosOptions)
+      const {
+        data: {
+          Item: {
+            Item: {
+              Likes: { N },
+            },
+          },
+        },
+      } = response
+
+      setBlog({ ...blog, likes: N })
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <div className='blog-box'>
@@ -30,7 +64,7 @@ const Blog = (blog) => {
           <div id='date'>{blog.date}</div>
         </div>
         <i id='likes-icon' className='fa fa-heart' onClick={handleLikeUpdate} />
-        <div id='likes'>{blog.likes}</div>
+        <div id='likes'>{blog.likes || 0}</div>
       </div>
 
       <div className='body'>

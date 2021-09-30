@@ -13,8 +13,6 @@ import { useUser } from '../Contexts/UserContext'
 import LoginModal from './loginModal'
 
 function Navbar() {
-  // const [OTPToken, setOTPToken] = useState("");
-  // const [loginToken, setLoginToken] = useState("");
   const { user, setUser, showOverlay, setShowOverlay } = useUser()
 
   const [click, setClick] = useState(false)

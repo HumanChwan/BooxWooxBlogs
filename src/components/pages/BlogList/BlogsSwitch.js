@@ -15,7 +15,7 @@ const BlogsSwitch = ({ blogs, loading, error }) => {
         user='silverduck204'
         authorPic='{blogs[i].authorPic}'
         date={dateFormatter(blog.Date)}
-        likes='24'
+        likes={blog.Likes}
         pic={blog.Feature_Img}
         heading={blog.Title}
         content={blog.Description}
