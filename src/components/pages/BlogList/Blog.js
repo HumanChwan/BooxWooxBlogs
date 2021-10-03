@@ -45,6 +45,34 @@ const Blog = (blogProp) => {
       console.error(e)
     }
   }
+  const handleDislikeUpdate = async () => {
+    const axiosOptions = {
+      method: 'PUT',
+      url: process.env.REACT_APP_DISLIKE_BLOG_ENDPOINT,
+      data: {
+        id: blog.id,
+        Dislikes: parseInt(blog.dislikes),
+      },
+      ...HEADERS,
+    }
+
+    try {
+      const response = await axios(axiosOptions)
+      const {
+        data: {
+          Item: {
+            Item: {
+              Dislikes: { N },
+            },
+          },
+        },
+      } = response
+
+      setBlog({ ...blog, dislikes: N })
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   return (
     <div className='blog-box'>
@@ -63,8 +91,22 @@ const Blog = (blogProp) => {
           <div id='username'>{blog.user}</div>
           <div id='date'>{blog.date}</div>
         </div>
-        <i id='likes-icon' className='fa fa-heart' onClick={handleLikeUpdate} />
-        <div id='likes'>{blog.likes || 0}</div>
+        <div className='blog__people-data'>
+          <i
+            id='likes-icon'
+            className='fa fa-heart'
+            onClick={handleLikeUpdate}
+          />
+          <div id='likes'>{blog.likes || 0}</div>
+        </div>
+        <div className='blog__people-data'>
+          <i
+            id='dislikes-icon'
+            className='fa fa-thumbs-down'
+            onClick={handleDislikeUpdate}
+          />
+          <div id='likes'>{blog.dislikes || 0}</div>
+        </div>
       </div>
 
       <div className='body'>

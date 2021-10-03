@@ -132,6 +132,33 @@
   line-height: 28px;
 }
 
+#dislikes-icon {
+  color: #363636;
+  margin-left: 6%;
+  font-size: 30px;
+  position: relative;
+  cursor: pointer;
+
+  transition: transform ease-in var(--transition-time);
+}
+
+#dislikes-icon:hover {
+  color: #070707;
+  transform: scale(1.2);
+}
+
+#dislikes-icon:active {
+  transform: translateY(4px);
+}
+
+.blog__people-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 2rem;
+}
+
 .info {
   display: flex;
   flex-direction: column;
