@@ -10,6 +10,8 @@ import { useUser } from '../../Contexts/UserContext'
 import Modal from '../../Global/Modal'
 import ModalSwitch from './ModalSwitch'
 
+const HELPER_TEXT = ['# Header 1', '## Header 2', '**Bold**', '_Italics_']
+
 export default function NewBlog() {
   const { uploadBlog, getImgurLink } = useUser()
 
@@ -277,20 +279,38 @@ export default function NewBlog() {
                 .
               </p>
               <div className='create-new-blog__blog-content__wrapper'>
-                <textarea
-                  name='blog-content'
-                  placeholder='Add Blog Content'
-                  className='create-new-blog__form__input-text create-new-blog__form__textarea'
-                  value={rawContent}
-                  onChange={(e) => {
-                    setRawContent(e.target.value)
-                  }}
-                  onDragEnter={dragEnter}
-                  onDragOver={dragOver}
-                  onDragLeave={dragLeave}
-                  onDrop={textAreaFileDrop}
-                  ref={textAreaRef}
-                ></textarea>
+                <div className='create-new-blog__blog-content__editor-wrapper'>
+                  <div className='create-new-blog__blog-content__editor-helper'>
+                    <em>i</em>
+                    <div className='help-text-hidden'>
+                      {HELPER_TEXT.map((helpText, idx) => {
+                        return (
+                          <div
+                            key={idx}
+                            className='create-new-blog__blog-content__editor-helper__text'
+                          >
+                            <ReactMarkdown>{helpText}</ReactMarkdown>
+                            <code className='code'>{helpText}</code>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                  <textarea
+                    name='blog-content'
+                    placeholder='Add Blog Content'
+                    className='create-new-blog__form__input-text create-new-blog__form__textarea'
+                    value={rawContent}
+                    onChange={(e) => {
+                      setRawContent(e.target.value)
+                    }}
+                    onDragEnter={dragEnter}
+                    onDragOver={dragOver}
+                    onDragLeave={dragLeave}
+                    onDrop={textAreaFileDrop}
+                    ref={textAreaRef}
+                  ></textarea>
+                </div>
                 <div className='create-new-blog__blog-content__markdown'>
                   <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                     {rawContent}
