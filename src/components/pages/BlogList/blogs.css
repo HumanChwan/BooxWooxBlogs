@@ -29,6 +29,8 @@
   animation-duration: 3s;
   position: relative;
 
+  padding-right: 3.5rem;
+
   transition: transform ease-in var(--transition-time);
 }
 
@@ -121,7 +123,8 @@
   transform: translateY(4px);
 }
 
-#likes {
+#likes,
+#dislikes {
   position: relative;
   z-index: 1;
   margin-left: 15px;
@@ -165,6 +168,8 @@
   margin: 20px;
   width: 60%;
   top: 0;
+
+  flex-grow: 2;
 }
 
 .author-pic {
@@ -190,10 +195,6 @@
   display: flex;
   flex-direction: column;
   margin-left: 8%;
-  width: 91%;
-}
-.body > a {
-  width: 90%;
 }
 
 .content {
@@ -507,6 +508,9 @@
   .body {
     margin-left: 6%;
   }
+  #side-wrapper {
+    display: none;
+  }
 }
 
 #load-inactive {
@@ -642,11 +646,13 @@
   #load {
     justify-self: center;
   }
-  #likes-icon {
+  #likes-icon,
+  #dislikes-icon {
     font-size: 24px;
     right: 10%;
   }
-  #likes {
+  #likes,
+  #dislikes {
     font-size: 13px;
     right: 10%;
   }
@@ -674,7 +680,8 @@
   #bmi {
     margin-left: 60%;
   }
-  #likes {
+  #likes,
+  #dislikes {
     font-size: 12px;
   }
   .footing {

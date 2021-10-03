@@ -175,7 +175,9 @@ function Navbar() {
                   <div
                     id='user-menu-side'
                     onBlur={() => {
-                      setShowUserMenu(false)
+                      setTimeout(() => {
+                        setShowUserMenu(false)
+                      }, 100)
                     }}
                     tabIndex='0'
                   >

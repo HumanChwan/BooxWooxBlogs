@@ -105,7 +105,7 @@ const Blog = (blogProp) => {
             className='fa fa-thumbs-down'
             onClick={handleDislikeUpdate}
           />
-          <div id='likes'>{blog.dislikes || 0}</div>
+          <div id='dislikes'>{blog.dislikes || 0}</div>
         </div>
       </div>
 
