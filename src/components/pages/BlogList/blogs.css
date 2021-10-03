@@ -413,10 +413,7 @@
 #side-menu li {
   align-self: flex-start;
   font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.8vb;
-  line-height: 7vb;
+  font-size: 1.125rem;
   color: #000000;
 }
 
@@ -457,23 +454,26 @@
 #sort-orders {
   position: absolute;
   z-index: 100;
-  margin-left: 20px;
-  margin-top: 20px;
+  margin-top: -0.5rem;
+
+  padding: 0.25rem 0.125rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+
+  text-align: center;
+
   width: 300px;
-  height: fit-content;
+
   font-family: Roboto;
-  font-style: normal;
-  font-weight: 100;
-  font-size: 17px;
-  line-height: 20px;
-  color: #000000;
-  text-justify: center;
+  font-size: 1rem;
+
   border-radius: 10px;
   background-color: #ffffff;
+
+  box-shadow: rgb(60 64 67 / 15%) 0 0.125rem 0.375px 0.125rem;
 }
 
 #sort-orders-inactive {
@@ -488,7 +488,10 @@
 
 #sort-order:hover {
   color: #ffbd06;
-  transition: 0.5s;
+  transition: var(--transition-time);
+
+  background-color: #fafafa;
+  border-radius: 0.25rem;
 }
 
 #sort-direction {
