@@ -64,6 +64,7 @@
 .footer__upper__quick-nav > ul > li > a {
   color: #767676;
   font-size: 1.25rem;
+  text-decoration: none;
 }
 
 .footer__upper__quick-nav > ul > li > a:hover {
