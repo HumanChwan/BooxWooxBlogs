@@ -10,7 +10,13 @@ import { useUser } from '../../Contexts/UserContext'
 import Modal from '../../Global/Modal'
 import ModalSwitch from './ModalSwitch'
 
-const HELPER_TEXT = ['# Header 1', '## Header 2', '**Bold**', '_Italics_']
+const HELPER_TEXT = [
+  '# Header 1',
+  '## Header 2',
+  '**Bold**',
+  '_Italics_',
+  '[BooxWoox](https://www.booxwoox.com)',
+]
 
 export default function NewBlog() {
   const { uploadBlog, getImgurLink } = useUser()
